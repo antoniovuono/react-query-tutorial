@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "react-query-tutorial",
+    "slug": "react-query-tutorial",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
