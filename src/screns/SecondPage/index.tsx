@@ -4,12 +4,10 @@ import { Text, TouchableOpacity } from "react-native";
 
 import { Container, Loading, Username } from "./styles";
 import { useSearchUser } from "../../hooks/useSearchUser";
-import { useUserStore } from "../../store/user";
 
-export const Home = () => {
+export const SecondPage = () => {
     const { navigate } = useNavigation();
 
-    const setUsername = useUserStore((state) => state.updateName);
     const { isError, error, isLoading, data } = useSearchUser();
 
     if (isLoading) {
@@ -17,15 +15,13 @@ export const Home = () => {
     }
 
     if (isError) {
-        return <Username>{error.message}</Username>;
+        return <Username>{error?.message}</Username>;
     }
-
-    setUsername(data?.name);
 
     return (
         <Container>
             <Username>{data?.name}</Username>
-            <TouchableOpacity onPress={() => navigate("Second")}>
+            <TouchableOpacity onPress={() => navigate("Third")}>
                 <Text>Navegar</Text>
             </TouchableOpacity>
         </Container>
