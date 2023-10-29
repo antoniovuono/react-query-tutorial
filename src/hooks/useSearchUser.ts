@@ -1,10 +1,15 @@
 import { useQuery } from "react-query";
 
-import { getUser } from "../services/getUser";
+import { get } from "../services/network/get";
 
-export const useSearchUser = () => {
-    const { isLoading, isError, error, data } = useQuery(["key"], () =>
-        getUser("antoniovuono"),
+type useSearchUserProps = {
+    username: string;
+};
+
+export const useSearchUser = ({ username }: useSearchUserProps) => {
+    const { isLoading, isError, error, data } = useQuery(
+        ["user", username],
+        () => username && get(`users/${username}`),
     );
 
     return {

@@ -1,6 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
 
 import {
     Container,
@@ -12,15 +10,14 @@ import {
 } from "./styles";
 import { SearchButton } from "../../components/SearchButton";
 import { SearchInput } from "../../components/SearchInput";
-import { getUser } from "../../services/getUser";
+import { User } from "../../components/User";
+import { useSearchUser } from "../../hooks/useSearchUser";
 
 export const Home = () => {
     const [inputValue, setInputValue] = useState("");
     const [username, setUsername] = useState("");
 
-    const { isLoading, isError, error, data } = useQuery([username], () => {
-        if (username) return getUser(username);
-    });
+    const { data, isError, isLoading, error } = useSearchUser({ username });
 
     function handleSearch() {
         setUsername(inputValue);
@@ -44,9 +41,18 @@ export const Home = () => {
             ) : (
                 <Content>
                     {isError ? (
-                        <Username>{error?.message}</Username>
+                        <Username>
+                            {error.message || "Erro ao procurar usuário!"}`
+                        </Username>
                     ) : (
-                        <Username>{data?.name}</Username>
+                        data && (
+                            <User
+                                username={data.login}
+                                full_name={data.name}
+                                avatar_url={data.avatar_url}
+                                bio={data.bio}
+                            />
+                        )
                     )}
                 </Content>
             )}
