@@ -2,8 +2,10 @@ import "react-native-gesture-handler";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ThemeProvider } from "styled-components";
 
 import AppRoutes from "./src/routes";
+import theme from "./src/styles/theme";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -15,11 +17,13 @@ const queryClient = new QueryClient({
 
 const App = () => {
     return (
-        <QueryClientProvider client={queryClient}>
-            <SafeAreaProvider>
-                <AppRoutes />
-            </SafeAreaProvider>
-        </QueryClientProvider>
+        <ThemeProvider theme={theme}>
+            <QueryClientProvider client={queryClient}>
+                <SafeAreaProvider>
+                    <AppRoutes />
+                </SafeAreaProvider>
+            </QueryClientProvider>
+        </ThemeProvider>
     );
 };
 

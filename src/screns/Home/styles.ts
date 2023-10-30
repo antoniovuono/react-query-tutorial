@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 
 export const Container = styled(SafeAreaView)`
     flex: 1;
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
 
 export const SearchForm = styled.View`
@@ -18,7 +19,9 @@ export const Content = styled.View`
 
 export const Loading = styled.ActivityIndicator``;
 
-export const Username = styled.Text``;
+export const Username = styled.Text`
+    color: ${({ theme }) => theme.COLORS.PRIMARY_TEXT};
+`;
 
 export const NavigateContent = styled.View`
     padding: 20px;
